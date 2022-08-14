@@ -3,8 +3,21 @@ from typing import List
 from datetime import datetime
 
 
-def list_jobs(is_inactive: bool = False) -> List[Job]:
-    query = Job.objects.filter(is_inactive=is_inactive)
+def list_jobs(
+    job_id: int = None,
+    name: str = None,
+    cron_expression: str = None,
+    service_id: str = None,
+) -> List[Job]:
+    query = Job.objects.filter(is_inactive=False)
+    if job_id:
+        query = query.filter(id=job_id)
+    if name:
+        query = query.filter(name=name)
+    if cron_expression:
+        query = query.filter(cron_expression=cron_expression)
+    if service_id:
+        query = query.filter(service_id=service_id)
     return list(query.all())
 
 
@@ -37,11 +50,12 @@ def update_job(
         job.service_id = service_id
     job.updated_time = datetime.now()
     job.save()
+    return job
 
 
 def remove_job(
     job_id: int,
-) -> Job:
+):
     job = Job.objects.get(id=job_id)
     if not job.is_inactive:
         job.is_inactive = True
