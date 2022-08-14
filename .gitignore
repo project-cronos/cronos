@@ -1,0 +1,11 @@
+*/__pycache__/*
+*/*/__pycache__/*
+*.pyc
+./polls/__pycache__/*
+
+.vscode/
+bin/
+lib/
+pyvenv.cfg
+share/
+venv/
