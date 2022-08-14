@@ -9,3 +9,4 @@ pylint-django==2.5.3
 pytz==2022.1
 redis==4.3.4
 tox==3.25.1
+djangorestframework==3.13.1
