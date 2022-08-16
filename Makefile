@@ -21,3 +21,8 @@ env:
 .PHONY: source
 source:
 	source ./venv/bin/activate
+
+.PHONY: test
+test:
+	python manage.py test
+	pre-commit run --all-files
