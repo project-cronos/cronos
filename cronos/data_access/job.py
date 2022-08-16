@@ -26,6 +26,8 @@ def create_job(
     cron_expression: str,
     service_id: str = None,
 ) -> Job:
+    if service_id and not isinstance(service_id, str):
+        raise ValueError("Service id must be a string")
     new_job = Job.objects.create(
         name=name,
         cron_expression=cron_expression,
@@ -47,6 +49,8 @@ def update_job(
     if cron_expression:
         job.cron_expression = cron_expression
     if service_id:
+        if not isinstance(service_id, str):
+            raise ValueError("Service id must be a string")
         job.service_id = service_id
     job.updated_time = datetime.now()
     job.save()
